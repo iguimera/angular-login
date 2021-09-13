@@ -95,6 +95,13 @@
               "src/styles.less"
             ],
             "scripts": []
+          },
+          "configurations": { 
+            "ci": {
+              "progress": false,
+              "watch": false,
+              "browsers": "ChromeHeadlessCI" 
+            }
           }
         },
         "lint": {
@@ -119,6 +126,10 @@
           "configurations": {
             "production": {
               "devServerTarget": "angular-registration-login-example:serve:production"
+            },
+            "ci": {
+              "devServerTarget": "app:serve:ci",
+              "protractorConfig": "e2e/protractor-ci.conf.js"
             }
           }
         }
