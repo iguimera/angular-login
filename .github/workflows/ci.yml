@@ -10,8 +10,8 @@ on: # ¿Cuando ejecutar?
     branches: [main] # o master
 
 jobs:
-  install:
-    name: Installation # Nombre del Job
+  ci:
+    name: Continuous Integration # Nombre del Job
     runs-on: ubuntu-latest # Ejecutar en Ubuntu
     steps:
       - uses: actions/checkout@v2 # Clonar repositorio actual
@@ -31,3 +31,9 @@ jobs:
         # No ejecutar si se obtuvo node_modules de cache
         if: steps.node-cache.outputs.cache-hit != 'true' 
         run: npm install
+      # Generar compilación de producción
+      - name: Run Build command
+        run: npm run build -- --prod
+      # Ejecutar pruebas unitarias
+      - name: Run Unit tests
+        run: npm run test -- --configuration=ci
