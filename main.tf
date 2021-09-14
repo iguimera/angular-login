@@ -6,6 +6,14 @@ terraform {
       version = "~> 4.0"
     }
   }
+  
+  backend "remote" {
+    organization = "easyGOband"
+
+    workspaces {
+      name = "github-actions-test"
+    }
+  }
 }
 
 provider "heroku" {
