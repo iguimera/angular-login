@@ -16,4 +16,9 @@ terraform {
   }
 }
 
+resource "heroku_app" "example" {
+  name   = "easy-go-beeed"
+  region = "us"
+}
+
 
