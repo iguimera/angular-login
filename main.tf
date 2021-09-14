@@ -17,11 +17,12 @@ terraform {
 }
 
 provider "heroku" {
-	
+	email = "ivanguimera93@gmail.com"
+	api_key = "cef639ff-1092-4ec6-bee0-af562198391d"
 }
 
 resource "heroku_app" "example" {
-  name   = "easy-go-bee"
+  name   = "easy-go-bute"
   region = "us"
 }
 
