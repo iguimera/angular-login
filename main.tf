@@ -7,4 +7,11 @@ terraform {
       name = "github-actions-test"
     }
   }
+  
+  required_providers {
+    heroku = {
+      source  = "heroku/heroku"
+      version = "~> 4.0"
+    }
+  }
 }
