@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     heroku = {
-      source = "hashicorp/heroku"
+      source = "heroku/heroku"
     }
     random = {
       source = "hashicorp/random"
