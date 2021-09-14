@@ -1,5 +1,16 @@
-# Terraform HCL
 terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/heroku"
+      version = "3.26.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.0.1"
+    }
+  }
+  required_version = ">= 0.14"
+
   backend "remote" {
     organization = "easyGOband"
 
@@ -7,20 +18,27 @@ terraform {
       name = "github-actions-test"
     }
   }
-  
-  required_providers {
-    heroku = {
-      source  = "hashicorp/heroku"
-      version = "~> 4.0"
-    }
-  }
 }
 
-resource "heroku_app" "example" {
-  name   = "hola"
+
+provider "aws" {
   region = "us"
 }
 
-output "example_app_url" {
-  value = "https://${heroku_app.example.name}.herokuapp.com"
+
+
+resource "random_pet" "sg" {}
+
+resource "heroku_app" "web" {
+  name                    = "iep"
+  user_data = <<-EOF
+              #!/bin/bash
+              echo "Hello, World" > index.html
+              nohup busybox httpd -f -p 8080 &
+              EOF
+}
+
+
+output "web-address" {
+  value = "${heroku_app.web.name}:8080"
 }
