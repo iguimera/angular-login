@@ -9,9 +9,3 @@ terraform {
 }
 
 
-resource "heroku_app" "web" {
-  name      = "iep"
-  region    = "us"
-}
-
-
