@@ -17,7 +17,7 @@ terraform {
 }
 
 variable "branch" {
-  
+  description = "Name of the Heroku app provisioned as an example"
 }
 
 resource "heroku_app" "example" {
