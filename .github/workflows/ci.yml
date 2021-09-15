@@ -5,9 +5,9 @@ name: CI test easyGOband
 
 on: # ¿Cuando ejecutar?
   push: # Al hacer push a las siguientes ramas
-    branches: [main] # o master
+    branches: [test] # o master
   pull_request: # Al crear un pull request a las siguientes ramas
-    branches: [main] # o master
+    branches: [test] # o master
 
 jobs:
   ci:
@@ -37,21 +37,35 @@ jobs:
       # Ejecutar pruebas unitarias
       - name: Run Unit tests
         run: npm run test -- --configuration=ci
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: "Build & test"
+        run: |
+          echo "done!"
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          # terraform_version: 0.13.0
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -check
-      - name: Terraform Init
-        id: init
-        run: terraform init 
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve
+          repo_token: "${{ secrets.GIT_TOKEN }}"
+          automatic_release_tag: steps.extract_branch.outputs.branch
+          prerelease: true
+          title: "Development Build"
+      #- name: Setup Terraform
+     # uses: hashicorp/setup-terraform@v1
+      #  with:
+       #   # terraform_version: 0.13.0
+        #  cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      #- name: Terraform Format
+       # id: fmt
+      #  run: terraform fmt -check
+     # - name: Terraform Init
+     #   id: init
+     #   run: terraform init 
+     # - name: Terraform Validate
+     #   id: validate
+     #   run: terraform validate -no-color
+     
+    #  - name: Terraform Apply
+    #    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+     #   run: terraform apply -auto-approve*/
