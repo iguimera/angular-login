@@ -46,10 +46,10 @@ jobs:
         run: |
           echo "done!"
       - name: Set branch
-        env: 
+        with: 
           TF_VAR_branch: "easyGOband-${{steps.extract_branch.outputs.branch}}"
-        run: |
-          echo "done!"
+          branch: "easyGOband-${{steps.extract_branch.outputs.branch}}"
+
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
