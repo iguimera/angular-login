@@ -45,10 +45,7 @@ jobs:
       - name: "Build & test"
         run: |
           echo "done!"
-      - name: Set branch
-        with: 
-          TF_VAR_branch: "easyGOband-${{steps.extract_branch.outputs.branch}}"
-          branch: "easyGOband-${{steps.extract_branch.outputs.branch}}"
+          
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -63,6 +60,9 @@ jobs:
         with:
         # terraform_version: 0.13.0
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          TF_VAR_branch: "easyGOband-${{steps.extract_branch.outputs.branch}}"
+          branch: "easyGOband-${{steps.extract_branch.outputs.branch}}"
+          
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
