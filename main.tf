@@ -19,7 +19,7 @@ terraform {
 
 
 resource "heroku_app" "example" {
-  name   = "${var.branch}"
+  name   = var.branch
   region = "us"
 }
 
