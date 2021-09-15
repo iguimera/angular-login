@@ -16,14 +16,14 @@ terraform {
   }
 }
 
-
+variable "branch" {
+  description = "Name of the Heroku app provisioned as an example"
+  default= "easyHola"
+}
 
 resource "heroku_app" "example" {
   name   = var.branch
   region = "us"
 }
 
-variable "branch" {
-  description = "Name of the Heroku app provisioned as an example"
-  default= "easyHola"
-}
+
