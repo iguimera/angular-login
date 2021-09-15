@@ -55,6 +55,8 @@ jobs:
       - name: Set branch
         env: 
           branch: "easyGOband-${{steps.extract_branch.outputs.branch}}"
+        run: |
+          echo "done!"
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
