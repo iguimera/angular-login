@@ -5,9 +5,9 @@ name: CI test easyGOband
 
 on: # ¿Cuando ejecutar?
   push: # Al hacer push a las siguientes ramas
-    branches: [main] # o master
+    branches: [test] # o master
   pull_request: # Al crear un pull request a las siguientes ramas
-    branches: [main] # o master
+    branches: [test] # o master
 
 jobs:
   ci:
@@ -37,13 +37,18 @@ jobs:
       # Ejecutar pruebas unitarias
       - name: Run Unit tests
         run: npm run test -- --configuration=ci
+        
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
       - name: "Build & test"
         run: |
           echo "done!"
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
+          repo_token: "${{ secrets.GIT_TOKEN }}"
+          automatic_release_tag: steps.extract_branch.outputs.branch
           prerelease: true
           title: "Development Build"
       #- name: Setup Terraform
