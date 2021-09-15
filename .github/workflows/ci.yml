@@ -51,6 +51,9 @@ jobs:
           automatic_release_tag: "${{steps.extract_branch.outputs.branch}}"
           prerelease: true
           title: "Development Build"
+          
+      - name: Set branch
+        run: echo '::set-env name=branch::"easyGOband-${{steps.extract_branch.outputs.branch}}"'
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
@@ -68,4 +71,4 @@ jobs:
      
       - name: Terraform Apply
         if: github.event_name == 'push'
-        run: terraform apply -var branch="easyGOband-${{steps.extract_branch.outputs.branch}}" -auto-approve
+        run: terraform apply -auto-approve
