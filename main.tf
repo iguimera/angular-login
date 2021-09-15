@@ -16,8 +16,12 @@ terraform {
   }
 }
 
+variable "branch" {
+  
+}
+
 resource "heroku_app" "example" {
-  name   = "easy-go-beeed"
+  name   = var.branch
   region = "us"
 }
 
