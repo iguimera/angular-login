@@ -80,5 +80,5 @@ jobs:
         if: github.event_name == 'push'
         env:
           branch: 'easyGOband-${{steps.extract_branch.outputs.branch}}'
-        run: terraform apply -auto-approve
+        run: terraform apply -var-file="testing.tfvars" -auto-approve
         
