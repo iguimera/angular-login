@@ -27,16 +27,16 @@ jobs:
           # Se usará el mismo cache siempre y cuando sea el mismo sistema operativo y no existan cambios en el archivo package-lock
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       # Instalar dependencias
-      - name: Install dependencies
+      #- name: Install dependencies
         # No ejecutar si se obtuvo node_modules de cache
-        if: steps.node-cache.outputs.cache-hit != 'true' 
-        run: npm install
+      #  if: steps.node-cache.outputs.cache-hit != 'true' 
+       # run: npm install
       # Generar compilación de producción
-      - name: Run Build command
-        run: npm run build -- --prod
+      #- name: Run Build command
+       # run: npm run build -- --prod
       # Ejecutar pruebas unitarias
-      - name: Run Unit tests
-        run: npm run test -- --configuration=ci
+      #- name: Run Unit tests
+       # run: npm run test -- --configuration=ci
         
       - name: Extract branch name
         shell: bash
@@ -60,6 +60,7 @@ jobs:
         with:
         # terraform_version: 0.13.0
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          args: '-var="branch=easyGOband-${{steps.extract_branch.outputs.branch}}"'
           
           
       - name: Terraform Format
@@ -75,6 +76,4 @@ jobs:
       - name: Terraform Apply
         if: github.event_name == 'push'
         run: terraform apply -auto-approve
-        env:
-          TF_VAR_branch: "easyGOband-${{steps.extract_branch.outputs.branch}}"
-          branch: "easyGOband-${{steps.extract_branch.outputs.branch}}"
+        
