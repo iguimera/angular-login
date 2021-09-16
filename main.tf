@@ -18,6 +18,7 @@ terraform {
 
 variable "branch" {
   type    = string
+  description = "hoaldwad"
 }
 
 resource "heroku_app" "example" {
