@@ -16,8 +16,9 @@ terraform {
   }
 }
 
-variable "AUTOMATIC_RELEASES_TAG"{
-  description = "Hoa"
+variable "AUTOMATIC_RELEASES_TAG" {
+  type    = string
+  default = "easyyy"
 }
 
 resource "heroku_app" "example" {
