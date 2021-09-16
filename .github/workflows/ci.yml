@@ -74,11 +74,11 @@ jobs:
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
-     
+      - name: export
+        run: export TF_VAR_branch='easyGOband-${{steps.extract_branch.outputs.branch}}'
       - name: Terraform Apply
         if: github.event_name == 'push'
         env:
-          TF_VAR_branch: 'easyGOband-${{steps.extract_branch.outputs.branch}}'
           branch: 'easyGOband-${{steps.extract_branch.outputs.branch}}'
         run: terraform apply -auto-approve
         
