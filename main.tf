@@ -16,7 +16,9 @@ terraform {
   }
 }
 
-
+variable "AUTOMATIC_RELEASES_TAG"{
+  description = "Hoa"
+}
 
 resource "heroku_app" "example" {
   name   = var.AUTOMATIC_RELEASES_TAG
