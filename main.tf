@@ -19,7 +19,7 @@ terraform {
 
 
 resource "heroku_app" "example" {
-  name   = "${var.AUTOMATIC_RELEASES_TAG}"
+  name   = var.AUTOMATIC_RELEASES_TAG
   region = "us"
 }
 
