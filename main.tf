@@ -17,7 +17,6 @@ terraform {
 }
 
 variable "branch" {
-  type    = string
   description = "hoaldwad"
 }
 
