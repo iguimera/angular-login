@@ -18,7 +18,6 @@ terraform {
 
 variable "branch" {
   type    = string
-  default = "ieee"
 }
 
 resource "heroku_app" "example" {
