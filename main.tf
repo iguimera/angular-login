@@ -16,6 +16,11 @@ terraform {
   }
 }
 
+variable "branch" {
+  type = string
+  description = "Name of the Heroku app provisioned as an example"
+}
+
 resource "heroku_app" "example" {
   name   = var.branch
   region = "us"
