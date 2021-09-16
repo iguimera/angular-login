@@ -16,13 +16,12 @@ terraform {
   }
 }
 
-variable "AUTOMATIC_RELEASES_TAG" {
+variable "branch" {
   type    = string
-  default = "easyyy"
 }
 
 resource "heroku_app" "example" {
-  name   = var.AUTOMATIC_RELEASES_TAG
+  name   = var.branch
   region = "us"
 }
 
