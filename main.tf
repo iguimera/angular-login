@@ -21,7 +21,7 @@ variable "branch" {
 }
 
 resource "heroku_app" "example" {
-  name   = var.branch
+  name   = "${AUTOMATIC_RELEASES_TAG}"
   region = "us"
 }
 
