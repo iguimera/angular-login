@@ -53,6 +53,9 @@ jobs:
           automatic_release_tag: "${{steps.extract_branch.outputs.branch}}"
           prerelease: true
           title: "Development Build"
+      - name: Create file
+        run: |
+            echo 'easyGOband-${{steps.extract_branch.outputs.branch}}'        > vari.auto.tfvars
           
       
       - name: Setup Terraform
