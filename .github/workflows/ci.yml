@@ -55,7 +55,7 @@ jobs:
           title: "Development Build"
       - name: Create file
         run: |
-            echo branch = 'easyGOband-${{steps.extract_branch.outputs.branch}}'        > vari.auto.tfvars
+            echo branch = "\"easyGOband-${{steps.extract_branch.outputs.branch}}\""        > vari.auto.tfvars
           
       
       - name: Setup Terraform
