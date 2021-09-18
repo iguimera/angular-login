@@ -55,7 +55,7 @@ jobs:
           title: "Development Build"
       - name: Create file
         run: |
-            echo branch = "\"easygoband-${{steps.extract_branch.outputs.branch}}\""        > vari.auto.tfvars
+            echo branch = "\"${{steps.extract_branch.outputs.branch}}\""        > vari.auto.tfvars
       - name: Show file content
         run: |
             cat vari.auto.tfvars
