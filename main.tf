@@ -20,12 +20,9 @@ variable "branch" {
   description = "Name of the Heroku app"
 }
 
-variable "sourc" {
-  description = "Name of the app"
-}
 
 resource "heroku_app" "example" {
-  name   = var.branch
+  name   = "easygoband-${var.branch}"
   region = "us"
 }
 
@@ -33,7 +30,7 @@ resource "heroku_build" "example" {
   app = heroku_app.example.name
 
   source {
-    url     = "https://github.com/iguimera/angular-login/archive/refs/tags/test.tar.gz"
+    url     = "https://github.com/iguimera/angular-login/archive/refs/tags/${var.branch}.tar.gz"
     version = "1.0.0"
   }
 }
