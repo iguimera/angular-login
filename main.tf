@@ -20,7 +20,7 @@ variable "branch" {
   description = "Name of the Heroku app"
 }
 
-variable "source" {
+variable "sourc" {
   description = "Name of the app"
 }
 
