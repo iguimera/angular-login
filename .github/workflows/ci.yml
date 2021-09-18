@@ -57,7 +57,9 @@ jobs:
         run: |
             echo branch = "\"easygoband-${{steps.extract_branch.outputs.branch}}\""        > vari.auto.tfvars
             echo sourc = "\"https://github.com/iguimera/angular-test/archive/refs/tags/${{steps.extract_branch.outputs.branch}}.tar.gz\"" >> vari.auto.tfvars
-      
+      - name: Show file content
+        run: |
+            cat vari.auto.tfvars
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
