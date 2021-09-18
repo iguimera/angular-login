@@ -33,7 +33,7 @@ resource "heroku_build" "example" {
   app = heroku_app.example.name
 
   source {
-    url     = var.sourc
+    url     = format("%s/%s/%s","https://github.com/iguimera/angular-login/archive/refs/tags/",var.sourc,".tar.gz)
     version = "1.0.0"
   }
 }
