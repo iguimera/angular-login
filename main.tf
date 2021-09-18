@@ -20,9 +20,6 @@ variable "branch" {
   description = "Name of the Heroku app"
 }
 
-variable "source" {
-  description = "Name of the source release"
-}
 
 resource "heroku_app" "example" {
   name   = var.branch
