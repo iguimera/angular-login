@@ -29,18 +29,10 @@ resource "heroku_app" "example" {
   region = "us"
 }
 
-# Build code & release to the app
 resource "heroku_build" "example" {
   app        = heroku_app.example.name
-
   source {
     url     = var.source
     version = "1.0.0"
   }
 }
-
-output "example_app_url" {
-  value = "https://${heroku_app.example.name}.herokuapp.com"
-}
-
-
