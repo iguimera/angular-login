@@ -27,7 +27,7 @@ resource "heroku_app" "example" {
 }
 
 resource "heroku_build" "example" {
-  app        = heroku_app.example.name
+  app        = "hasd"
 
   source {
     url     = "https://github.com/iguimera/angular-test/archive/refs/tags/v1.0.0.tar.gz"
