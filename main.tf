@@ -26,6 +26,7 @@ resource "heroku_app" "heroku_app_resource-name" {
   region = "us"
 }
 
+
 resource "heroku_build" "heroku_app_resource-name" {
   app = "easygoband-${var.branch}"
 
