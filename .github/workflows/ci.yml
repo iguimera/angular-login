@@ -53,6 +53,13 @@ jobs:
           automatic_release_tag: "${{steps.extract_branch.outputs.branch}}"
           prerelease: true
           title: "Development Build"
+          
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: "heroku_app_resource-name"
+          replace: "${{steps.extract_branch.outputs.branch}}"
+          include: "main.tf"
       - name: Create file
         run: |
             echo branch = "\"${{steps.extract_branch.outputs.branch}}\""        > vari.auto.tfvars
