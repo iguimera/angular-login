@@ -35,6 +35,7 @@ resource "heroku_build" "example" {
 
   source {
     url     = var.source
+    version = "1.0.0"
   }
 }
 
