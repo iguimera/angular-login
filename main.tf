@@ -16,22 +16,11 @@ terraform {
   }
 }
 
-variable "branch" {
-  description = "Name of the Heroku app"
-}
+module "heroku-free-stack" {
+  
+  source = "git@github.com:iguimera/angular-login.git?ref=test1"
 
+  name = "someawesomeappname"
 
-resource "heroku_app" "example" {
-  name   = "easygoband-${var.branch}"
-  region = "us"
-}
-
-
-resource "heroku_build" "example" {
-  app = heroku_app.example.name
-
-  source {
-    url     = "https://github.com/iguimera/angular-login/archive/refs/tags/${var.branch}.tar.gz"
-    version = "1.0.0"
-  }
+  
 }
