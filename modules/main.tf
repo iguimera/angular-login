@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    heroku = {
+      source = "heroku/heroku"
+    }
+  }
+}
+
 
 resource "heroku_app" "example" {
   name   = "easygoband-teste"
