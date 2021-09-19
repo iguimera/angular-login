@@ -7,13 +7,13 @@ terraform {
 }
 
 
-resource "heroku_app" "example" {
+resource "heroku_app" "prueba" {
   name   = "easygoband-teste2222"
   region = "us"
 }
 
 
-resource "heroku_build" "example" {
+resource "heroku_build" "prueba" {
   app = heroku_app.example.name
 
   source {
