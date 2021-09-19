@@ -27,16 +27,16 @@ jobs:
           # Se usará el mismo cache siempre y cuando sea el mismo sistema operativo y no existan cambios en el archivo package-lock
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       # Instalar dependencias
-      - name: Install dependencies
+      #- name: Install dependencies
         # No ejecutar si se obtuvo node_modules de cache
-        if: steps.node-cache.outputs.cache-hit != 'true' 
-        run: npm install
+      #  if: steps.node-cache.outputs.cache-hit != 'true' 
+       # run: npm install
       # Generar compilación de producción
-      - name: Run Build command
-        run: npm run build -- --prod
+      #- name: Run Build command
+       # run: npm run build -- --prod
       # Ejecutar pruebas unitarias
-      - name: Run Unit tests
-        run: npm run test -- --configuration=ci
+      #- name: Run Unit tests
+       # run: npm run test -- --configuration=ci
         
       - name: Extract branch name
         shell: bash
@@ -45,23 +45,33 @@ jobs:
       - name: "Build & test"
         run: |
           echo "done!"
+          
+
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          repo_token: "${{ secrets.GIT_TOKEN }}"
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "${{steps.extract_branch.outputs.branch}}"
           prerelease: true
           title: "Development Build"
+          
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@master
         with:
           find: "heroku_app_resource-name"
           replace: "${{steps.extract_branch.outputs.branch}}"
           include: "main.tf"
+      - name: Create file
+        run: |
+            echo branch = "\"${{steps.extract_branch.outputs.branch}}\""        > vari.auto.tfvars
+      - name: Show file content
+        run: |
+            cat vari.auto.tfvars
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
         # terraform_version: 0.13.0
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+                
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
@@ -71,7 +81,11 @@ jobs:
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
-     
+      - name: export
+        run: export TF_VAR_branch='easyGOband-${{steps.extract_branch.outputs.branch}}'
       - name: Terraform Apply
         if: github.event_name == 'push'
+        env:
+          branch: 'easyGOband-${{steps.extract_branch.outputs.branch}}'
         run: terraform apply -auto-approve
+        
