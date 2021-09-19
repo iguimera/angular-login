@@ -16,6 +16,9 @@ terraform {
   }
 }
 
+module "consulta" {
+  source = "./modules"
+}
 
 
 module "consul" {
