@@ -18,7 +18,6 @@ terraform {
 
 
 
-resource "heroku_app" "ble" {
-  name   = "easygoband-testimport"
-  region = "us"
+module "consul" {
+  source = "./moduleses"
 }
