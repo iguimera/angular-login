@@ -17,10 +17,5 @@ terraform {
 }
 
 module "heroku-free-stack" {
-  
-  source = "git@github.com:iguimera/angular-login.git?ref=test1"
-
-  name = "someawesomeappname"
-
-  
+  source = "./modules"
 }
