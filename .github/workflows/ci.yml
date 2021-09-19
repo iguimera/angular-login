@@ -5,9 +5,9 @@ name: CI test easyGOband
 
 on: # ¿Cuando ejecutar?
   push: # Al hacer push a las siguientes ramas
-    branches: [test] # o master
+    branches: [test1] # o master
   pull_request: # Al crear un pull request a las siguientes ramas
-    branches: [test] # o master
+    branches: [test1] # o master
 
 jobs:
   ci:
@@ -57,7 +57,7 @@ jobs:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@master
         with:
-          find: "heroku_app_resource-name"
+          find: "example"
           replace: "${{steps.extract_branch.outputs.branch}}"
           include: "main.tf"
       - name: Create file
@@ -85,7 +85,5 @@ jobs:
         run: export TF_VAR_branch='easyGOband-${{steps.extract_branch.outputs.branch}}'
       - name: Terraform Apply
         if: github.event_name == 'push'
-        env:
-          branch: 'easyGOband-${{steps.extract_branch.outputs.branch}}'
         run: terraform apply -auto-approve
         
