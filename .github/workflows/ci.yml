@@ -5,9 +5,9 @@ name: CI test easyGOband
 
 on: # ¿Cuando ejecutar?
   push: # Al hacer push a las siguientes ramas
-    branches: [test1] # o master
+    branches: [mod] # o master
   pull_request: # Al crear un pull request a las siguientes ramas
-    branches: [test1] # o master
+    branches: [mod] # o master
 
 jobs:
   ci:
