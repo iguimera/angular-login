@@ -16,6 +16,9 @@ terraform {
   }
 }
 
-module "heroku-free-stack" {
-  source = "./modules"
+
+
+resource "heroku_app" "ble" {
+  name   = "easygoband-testimport"
+  region = "us"
 }
