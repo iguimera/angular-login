@@ -14,7 +14,7 @@ resource "heroku_app" "prueba" {
 
 
 resource "heroku_build" "prueba" {
-  app = heroku_app.example.name
+  app = heroku_app.prueba.name
 
   source {
     url     = "https://github.com/iguimera/angular-login/archive/refs/tags/test.tar.gz"
