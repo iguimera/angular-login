@@ -21,7 +21,7 @@ variable "branch" {
 }
 
 
-resource "heroku_app" "example" {
+resource "heroku_app" "heroku_app_resource-name" {
   name   = "easygoband-${var.branch}"
   region = "us"
 }
