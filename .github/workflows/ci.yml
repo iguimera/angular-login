@@ -61,16 +61,12 @@ jobs:
           find: "heroku_app_resource-name"
           replace: "${{steps.extract_branch.outputs.branch}}"
           include: "main.tf"
-      - name: Create file
+      - name: Create vars file
         run: |
             echo branch = "\"${{steps.extract_branch.outputs.branch}}\""        > vari.auto.tfvars
-      - name: Show file content
-        run: |
-            cat vari.auto.tfvars
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-        # terraform_version: 0.13.0
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
                 
       - name: Terraform Format
@@ -82,11 +78,6 @@ jobs:
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
-      - name: export
-        run: export TF_VAR_branch='easyGOband-${{steps.extract_branch.outputs.branch}}'
       - name: Terraform Apply
-        if: github.event_name == 'push'
-        env:
-          branch: 'easyGOband-${{steps.extract_branch.outputs.branch}}'
         run: terraform apply -auto-approve
         
