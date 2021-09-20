@@ -3,8 +3,8 @@
 
 name: CI test easyGOband
 
-on: # ¿Cuando ejecutar?
-  push: # Al hacer push a las siguientes ramas
+on: 
+  push:
     branches-ignore:
       - master
       - 'dev'
@@ -12,32 +12,30 @@ on: # ¿Cuando ejecutar?
 
 jobs:
   ci:
-    name: Continuous Integration # Nombre del Job
-    runs-on: ubuntu-latest # Ejecutar en Ubuntu
+    name: Continuous Integration
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2 # Clonar repositorio actual
-      - uses: actions/setup-node@v1 # Usar Node
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
           node-version: 12 # Versión de Node
-      # Cargar cache de node_modules, para reducir tiempo de instalación en próximas ejecuciones
+    
       - name: Cache node modules
         id: node-cache # Id del cache
         uses: actions/cache@v1
         with:
           path: node_modules
-          # Se usará el mismo cache siempre y cuando sea el mismo sistema operativo y no existan cambios en el archivo package-lock
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      # Instalar dependencias
-      #- name: Install dependencies
-        # No ejecutar si se obtuvo node_modules de cache
-      #  if: steps.node-cache.outputs.cache-hit != 'true' 
-       # run: npm install
-      # Generar compilación de producción
-      #- name: Run Build command
-       # run: npm run build -- --prod
-      # Ejecutar pruebas unitarias
-      #- name: Run Unit tests
-       # run: npm run test -- --configuration=ci
+
+      - name: Install dependencies
+        if: steps.node-cache.outputs.cache-hit != 'true' 
+        run: npm install
+    
+      - name: Run Build command
+        run: npm run build -- --prod
+      
+      - name: Run Unit tests
+        run: npm run test -- --configuration=ci
         
       - name: Extract branch name
         shell: bash
