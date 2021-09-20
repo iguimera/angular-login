@@ -27,7 +27,7 @@ resource "heroku_app" "heroku_app_resource-name" {
 }
 
 
-resource "heroku_build" "example" {
+resource "heroku_build" "heroku_app_resource-name" {
   app = heroku_app.example.name
 
   source {
